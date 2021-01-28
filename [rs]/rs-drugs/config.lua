@@ -36,7 +36,7 @@ end
 
 Config.Dealers = {
     [1] = {
-        ["name"] = "Sam Van Deeg", -- aangepast
+        ["name"] = "De Steeg", -- aangepast
         ["coords"] = {
             ["x"] = -399.91, 
             ["y"] = 6377.74, 
