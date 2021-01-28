@@ -4,41 +4,31 @@ setupServicesList = function(data) {
 
     if (data.length > 0 )
     {
-        
-        
-            var element = '';
-             $.each(data, function(i, service){
-                
+        $.each(data, function(i, service){              
                
                 if (service.onduty){
-                element = '<div class="service-list">';
+                var element = '<div class="service-list" id="serviceid-'+i+' data-name="'+service.name+'" data-phone="'+service.phone+'"> ';
                 element += '<div class="service-list-firstletter">'+(service.name).charAt(0).toUpperCase()+'</div>';
                 element += '<div class="service-list-fullname">'+service.job+'</div>';
                 element += '<div class="service-list-call"><i class="fas fa-phone"></i></div>';
                 element += '</div>';
                 
-                $("#serviceid-"+i).data('ServiceData', service);
-                 
-                }
+                $("#serviceid-"+i).data('ServiceData', service)
                 $(".services-list").append(element);
+                }
+                
              })
                    
     }
-
-    
-        
-        
-    
 }
 
-$(document).on('click', '.services-list-call', function(e){
+$(document).on('click', '.service-list-call', function(e){
     e.preventDefault();
 
-    var servicesData = $(this).parent().data('ServiceData');
-    
+  
     var cData = {
-        number: servicesData.phone,
-        name: servicesData.name
+        number: $(this).parent().data('phone'),
+        name:  $(this).parent().data('name')
     }
 
     $.post('http://rs-phone/CallContact', JSON.stringify({

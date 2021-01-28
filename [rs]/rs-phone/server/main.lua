@@ -1127,16 +1127,10 @@ AddEventHandler('rs-phone:server:RemoveInstallation', function(App)
     -- TriggerClientEvent('rs-phone:RefreshPhone', src)
 end)
 RSCore.Commands.Add("ophangen", "Hang telefoon op", {}, false, function(source, args)
-     local Plt = RSCore.Functions.GetPlayer(source)
+     
+     TriggerClientEvent('rs-phone:client:Test', source)
+  
 
-    if Calls[Ply.PlayerData.citizenid] ~= nil then
-        Calls[Ply.PlayerData.citizenid].inCall = false
-    else
-        Calls[Ply.PlayerData.citizenid] = {}
-        Calls[Ply.PlayerData.citizenid].inCall = false
-    end
-
-    TriggerClientEvent('rs-phone:client:CancelCall', Ply.PlayerData.source)
 end)
 RSCore.Commands.Add("setmetadata", "Set metadata", {}, false, function(source, args)
 	local Player = RSCore.Functions.GetPlayer(source)

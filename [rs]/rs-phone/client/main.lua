@@ -1273,7 +1273,7 @@ end
 CancelCall = function()
     TriggerServerEvent('rs-phone:server:CancelCall', PhoneData.CallData)
     if PhoneData.CallData.CallType == "ongoing" then
-        exports.tokovoip_script:removePlayerFromRadio(PhoneData.CallData.CallId)
+        --exports.tokovoip_script:removePlayerFromRadio(PhoneData.CallData.CallId)
     end
     PhoneData.CallData.CallType = nil
     PhoneData.CallData.InCall = false
@@ -1328,11 +1328,71 @@ end
 
 RegisterNetEvent('rs-phone:client:CancelCall')
 AddEventHandler('rs-phone:client:CancelCall', function()
+    TriggerServerEvent('rs-phone:server:CancelCall', PhoneData.CallData)
     if PhoneData.CallData.CallType == "ongoing" then
         SendNUIMessage({
             action = "CancelOngoingCall"
         })
-        exports.tokovoip_script:removePlayerFromRadio(PhoneData.CallData.CallId)
+        --exports.tokovoip_script:removePlayerFromRadio(PhoneData.CallData.CallId)
+    end
+    PhoneData.CallData.CallType = nil
+    PhoneData.CallData.InCall = false
+    PhoneData.CallData.AnsweredCall = false
+    PhoneData.CallData.TargetData = {}
+
+    if not PhoneData.isOpen then
+        StopAnimTask(PlayerPedId(), PhoneData.AnimationData.lib, PhoneData.AnimationData.anim, 2.5)
+        deletePhone()
+        PhoneData.AnimationData.lib = nil
+        PhoneData.AnimationData.anim = nil
+    else
+        PhoneData.AnimationData.lib = nil
+        PhoneData.AnimationData.anim = nil
+    end
+
+    TriggerServerEvent('rs-phone:server:SetCallState', false)
+
+    if not PhoneData.isOpen then
+        SendNUIMessage({ 
+            action = "Notification", 
+            NotifyData = { 
+                title = "Telefoon",
+                content = "De oproep is beëindigd", 
+                icon = "fas fa-phone", 
+                timeout = 3500, 
+                color = "#e84118",
+            }, 
+        })            
+    else
+        SendNUIMessage({ 
+            action = "PhoneNotification", 
+            PhoneNotify = { 
+                title = "Telefoon", 
+                text = "De oproep is beëindigd", 
+                icon = "fas fa-phone", 
+                color = "#e84118", 
+            }, 
+        })
+
+        SendNUIMessage({
+            action = "SetupHomeCall",
+            CallData = PhoneData.CallData,
+        })
+
+        SendNUIMessage({
+            action = "CancelOutgoingCall",
+        })
+    end
+    
+end)
+
+RegisterNetEvent('rs-phone:client:Test')
+AddEventHandler('rs-phone:client:Test', function()
+    if PhoneData.CallData.CallType == "ongoing" then
+        SendNUIMessage({
+            action = "CancelOngoingCall"
+        })
+       -- exports.tokovoip_script:removePlayerFromRadio(PhoneData.CallData.CallId)
     end
     PhoneData.CallData.CallType = nil
     PhoneData.CallData.InCall = false
@@ -1383,7 +1443,6 @@ AddEventHandler('rs-phone:client:CancelCall', function()
         })
     end
 end)
-
 RegisterNetEvent('rs-phone:client:GetCalled')
 AddEventHandler('rs-phone:client:GetCalled', function(CallerNumber, CallId, AnonymousCall)
     local RepeatCount = 0
@@ -1509,7 +1568,7 @@ function AnswerCall()
 
         TriggerServerEvent('rs-phone:server:AnswerCall', PhoneData.CallData)
 
-        exports.tokovoip_script:addPlayerToRadio(PhoneData.CallData.CallId, 'Telefoon')
+       -- exports.tokovoip_script:addPlayerToRadio(PhoneData.CallData.CallId, 'Telefoon')
     else
         PhoneData.CallData.InCall = false
         PhoneData.CallData.CallType = nil
@@ -1562,7 +1621,7 @@ AddEventHandler('rs-phone:client:AnswerCall', function()
             end
         end)
 
-        exports.tokovoip_script:addPlayerToRadio(PhoneData.CallData.CallId, 'Telefoon')
+       -- exports.tokovoip_script:addPlayerToRadio(PhoneData.CallData.CallId, 'Telefoon')
     else
         PhoneData.CallData.InCall = false
         PhoneData.CallData.CallType = nil
