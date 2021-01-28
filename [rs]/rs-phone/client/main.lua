@@ -2063,9 +2063,9 @@ RegisterNUICallback('InstallApplication', function(data, cb)
     local ApplicationData = Config.StoreApps[data.app]
     local NewSlot = GetFirstAvailableSlot()
 
-    if not CanDownloadApps then
-        return
-    end
+    -- if not CanDownloadApps then
+    --     return
+    -- end
     
     if NewSlot <= Config.MaxSlots then
         TriggerServerEvent('rs-phone:server:InstallApplication', {

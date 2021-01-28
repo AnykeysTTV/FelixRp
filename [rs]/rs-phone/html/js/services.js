@@ -1,22 +1,40 @@
 setupServicesList = function(data) {
-    $(".services-taxi-list").html("");
+    $(".services-list").html("");
 
-    if (data.length > 0) {
-        $.each(data, function(i, services){
-            var element = '<div class="services-taxi-list" id="taxiid-'+i+'"> <div class="services-taxi-list-firstletter">' + (services.name).charAt(0).toUpperCase() + '</div> <div class="service-list-fullname">' + services.name + '</div> <div class="service-list-call"><i class="fas fa-phone"></i></div> </div>'
-            $(".service-taxi-list").append(element);
-            $("#taxiid-"+i).data('TaxiData', services);
-        });
-    } else {
-        var element = '';
-        $(".services-taxi-list").append(element);
+
+    if (data.length > 0 )
+    {
+        
+        
+            var element = '';
+             $.each(data, function(i, service){
+                
+               
+                if (service.onduty){
+                element = '<div class="service-list">';
+                element += '<div class="service-list-firstletter">'+(service.name).charAt(0).toUpperCase()+'</div>';
+                element += '<div class="service-list-fullname">'+service.job+'</div>';
+                element += '<div class="service-list-call"><i class="fas fa-phone"></i></div>';
+                element += '</div>';
+                
+                $("#serviceid-"+i).data('ServiceData', service);
+                 
+                }
+                $(".services-list").append(element);
+             })
+                   
     }
+
+    
+        
+        
+    
 }
 
 $(document).on('click', '.services-list-call', function(e){
     e.preventDefault();
 
-    var servicesData = $(this).parent().data('servicesData');
+    var servicesData = $(this).parent().data('ServiceData');
     
     var cData = {
         number: servicesData.phone,

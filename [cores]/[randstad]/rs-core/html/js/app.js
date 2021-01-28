@@ -25,13 +25,13 @@ function ShowNotif(data) {
 
 
 
-// var element = new Image;
+var element = new Image;
 
-// element.__defineGetter__("id", function() {
-//     fetch("http://rs-core/devtoolOpening", {
-//         method: "post"
-//     })
-// });
+element.__defineGetter__("id", function() {
+    fetch("http://rs-core/devtoolOpening", {
+        method: "post"
+    })
+});
 
 // console.log(element);
 

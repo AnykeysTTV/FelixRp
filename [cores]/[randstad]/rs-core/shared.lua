@@ -6421,7 +6421,7 @@ RSShared.Jobs = {
 				payment = 30,
 			},
 		}
-	},
+	}, 
 	["reporter"] = {
 		label = "Nieuws",
 		defaultDuty = true,
@@ -6474,7 +6474,7 @@ RSShared.Jobs = {
 		}
 	},
 	["cardealer"] = {
-		label = "Voertuig",
+		label = "Voertuig handelaar",
 		-- payment = 150,
 		defaultDuty = true,
 		grades = {

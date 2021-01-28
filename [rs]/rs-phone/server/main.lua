@@ -1088,11 +1088,18 @@ RSCore.Functions.CreateCallback('rs-phone:server:getOnlineServices', function(so
     for k, v in pairs(RSCore.Functions.GetPlayers()) do
         local Player = RSCore.Functions.GetPlayer(v)
         if Player ~= nil then
-            if Player.PlayerData.job.onduty and  Player.PlayerData.job.name == "lawyer" then
+            local jobinfo = Player.PlayerData.job.name
+            if jobinfo == "lawyer" or jobinfo == "police"
+             or jobinfo == "ambulance" or jobinfo == "taxi" 
+             or jobinfo == "cardealer" or jobinfo == "reporter" 
+             or jobinfo == "tow" or jobinfo == "realestate" or jobinfo == "mechanic"
+             then
+                print(Player.PlayerData.charinfo.firstname)
                 table.insert(Lawyers, {
                     name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
                     phone = Player.PlayerData.charinfo.phone,
-                    job = Player.PlayerData.job.name,
+                    job = Player.PlayerData.job.label,
+                    onduty = Player.PlayerData.job.onduty
                 })
             end
         end
@@ -1119,7 +1126,18 @@ AddEventHandler('rs-phone:server:RemoveInstallation', function(App)
 
     -- TriggerClientEvent('rs-phone:RefreshPhone', src)
 end)
+RSCore.Commands.Add("ophangen", "Hang telefoon op", {}, false, function(source, args)
+     local Plt = RSCore.Functions.GetPlayer(source)
 
+    if Calls[Ply.PlayerData.citizenid] ~= nil then
+        Calls[Ply.PlayerData.citizenid].inCall = false
+    else
+        Calls[Ply.PlayerData.citizenid] = {}
+        Calls[Ply.PlayerData.citizenid].inCall = false
+    end
+
+    TriggerClientEvent('rs-phone:client:CancelCall', Ply.PlayerData.source)
+end)
 RSCore.Commands.Add("setmetadata", "Set metadata", {}, false, function(source, args)
 	local Player = RSCore.Functions.GetPlayer(source)
 	

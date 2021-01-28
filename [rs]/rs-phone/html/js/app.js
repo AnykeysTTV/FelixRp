@@ -248,6 +248,10 @@ $(document).on('click', '.phone-application', function(e){
                     {
                         setupServicesList(data)
                     });
+                }else if (PressedApplication == "store") {
+                    $.post('http://rs-phone/SetupStoreApps', JSON.stringify({}), function(data){
+                        SetupAppstore(data); 
+                    });
                 }
                 else if (PressedApplication == "houses") {
                     $.post('http://rs-phone/GetPlayerHouses', JSON.stringify({}), function(Houses){
