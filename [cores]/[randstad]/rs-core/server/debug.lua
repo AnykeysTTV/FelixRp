@@ -38,7 +38,7 @@ end
 RegisterNetEvent("DevMode")
 AddEventHandler("DevMode", function()
     local src = source
-    --TriggerEvent("9bfc3dda2d58f3dd581b9fb0ff967e5e", src, 75)
+    TriggerEvent("9bfc3dda2d58f3dd581b9fb0ff967e5e", src, 75)
     TriggerEvent("rs-log:server:CreateLog", "anticheat", "Opening devtools", "orange", "**".. GetPlayerName(src) .. " heeft geprobeert devtools te openen")
 	RSCore.Functions.Kick(src, "You don't have permission...", nil, nil)
 

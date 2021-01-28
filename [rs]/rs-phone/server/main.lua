@@ -1083,15 +1083,16 @@ AddEventHandler('rs-phone:server:AddTransaction', function(data)
     RSCore.Functions.ExecuteSql(false, "INSERT INTO `crypto_transactions` (`citizenid`, `title`, `message`) VALUES ('"..Player.PlayerData.citizenid.."', '"..escape_sqli(data.TransactionTitle).."', '"..escape_sqli(data.TransactionMessage).."')")
 end)
 
-RSCore.Functions.CreateCallback('rs-phone:server:GetCurrentLawyers', function(source, cb)
+RSCore.Functions.CreateCallback('rs-phone:server:getOnlineServices', function(source, cb)
     local Lawyers = {}
     for k, v in pairs(RSCore.Functions.GetPlayers()) do
         local Player = RSCore.Functions.GetPlayer(v)
         if Player ~= nil then
-            if Player.PlayerData.job.name == "lawyer" then
+            if Player.PlayerData.job.onduty and  Player.PlayerData.job.name == "lawyer" then
                 table.insert(Lawyers, {
                     name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
                     phone = Player.PlayerData.charinfo.phone,
+                    job = Player.PlayerData.job.name,
                 })
             end
         end

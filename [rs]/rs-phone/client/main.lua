@@ -1774,6 +1774,12 @@ RegisterNUICallback('GetCryptoData', function(data, cb)
     end, data.crypto)
 end)
 
+RegisterNUICallback("GetOnlineServices", function(data, cb)
+    RSCore.Functions.TriggerCallback('rs-phone:server:getOnlineServices', function(services)
+        cb(services)
+    end)
+end)
+
 RegisterNUICallback('BuyCrypto', function(data, cb)
     RSCore.Functions.TriggerCallback('rs-crypto:server:BuyCrypto', function(CryptoData)
         cb(CryptoData)

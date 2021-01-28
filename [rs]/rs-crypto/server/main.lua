@@ -21,10 +21,6 @@ RSCore.Commands.Add("setcryptoworth", "Set crypto waarde", {{name="crypto", help
                     ChangeLabel = ""
                 end
 
-                table.insert(Crypto.History[crypto], {
-                    PreviousWorth = Crypto.Worth[crypto],
-                    NewWorth = NewWorth
-                })
 
                 TriggerClientEvent('RSCore:Notify', src, "Je hebt de waarde van "..Crypto.Labels[crypto].." aangepast van: (€"..Crypto.Worth[crypto].." naar: €"..NewWorth..") ("..ChangeLabel.." "..PercentageChange.."%)")
                 Crypto.Worth[crypto] = NewWorth
@@ -60,6 +56,7 @@ RSCore.Functions.CreateCallback('rs-crypto:server:FetchWorth', function(source, 
             if result[1] ~= nil then
                 Crypto.Worth[name] = result[1].worth
                 if result[1].history ~= nil then
+                    print(json.decode(result[1].history))
                     Crypto.History[name] = json.decode(result[1].history)
                     TriggerClientEvent('rs-crypto:client:UpdateCryptoWorth', -1, name, result[1].worth, json.decode(result[1].history))
                 else
@@ -160,9 +157,9 @@ end)
 
 RSCore.Functions.CreateCallback('rs-crypto:server:GetCryptoData', function(source, cb, name)
     local Player = RSCore.Functions.GetPlayer(source)
-    print(Crypto.History[name].NewWorth)
+    
     local CryptoData = {
-        History = Crypto.History[name],
+        History = {NewWorth = 1000, PreviousWorth = 500},--Crypto.History[name],
         Worth = Crypto.Worth[name],
         Portfolio = Player.PlayerData.money.crypto,
         WalletId = Player.PlayerData.metadata["walletid"],
@@ -258,18 +255,9 @@ RSCore.Functions.CreateCallback('rs-crypto:server:TransferCrypto', function(sour
 end)
 
 RSCore.Commands.Add("kaartje", "Krijg een advocaten pas (je oude vervalt)", {}, false, function(source, args)
-    local Player = RSCore.Functions.GetPlayer(source)
-    if Player.PlayerData.job.name == "cardealer" then
-        local lawyerInfo = {
-            id = "06555995",
-            firstname = Player.PlayerData.charinfo.firstname,
-            lastname = Player.PlayerData.charinfo.lastname,
-            citizenid = Player.PlayerData.citizenid,
-        }
-        Player.Functions.AddItem("lawyerpass", 1, false, lawyerInfo)
-        TriggerClientEvent('inventory:client:ItemBox', source, RSCore.Shared.Items["lawyerpass"], "add")
-        TriggerClientEvent("RSCore:Notify", source, "Je hebt een advocaten pas ontvangen")
-    else
-        TriggerClientEvent("RSCore:Notify", source, "Je hebt hier geen rechten voor..", "error")
-    end
+    RSCore.Functions.ExecuteSql(false, "SELECT * FROM `crypto` WHERE `crypto` = 'dogecoin'", function(result)
+        if result[1] ~= nil  then 
+            print(json.decode(result[1].history))
+        end 
+    end)
 end, "admin")

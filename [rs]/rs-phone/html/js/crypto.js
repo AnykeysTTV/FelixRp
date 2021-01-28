@@ -14,10 +14,22 @@ function SetupCryptoData(Crypto) {
     CryptoData.Portfolio = (Crypto.Portfolio).toFixed(6);
     CryptoData.Worth = Crypto.Worth;
     CryptoData.WalletId = Crypto.WalletId;
-    console.log(CryptoData.History)
-    $(".crypto-action-page-wallet").html("Portefeuille: "+CryptoData.Portfolio+" Dogecoin('s)");
-    $(".crypto-walletid").html(CryptoData.WalletId);
-    $(".cryptotab-course-list").html("");
+    console.log(CryptoData.History.NewWorth)
+    console.log(CryptoData.History.PreviousWorth)
+
+    // <div class="cryptotab-course">
+    // <div class="cryptotab-course-list">
+    //      <div class="cryptotab-course-block">
+    //         <i class="fas fa-chart-line"></i>
+    //         <span class="cryptotab-course-block-title">Koers verandering</span>
+    //         <span class="cryptotab-course-block-happening"><span style="font-size: 1.3vh;">€1000</span> naar <span style="font-size: 1.3vh;">€2000</span><span style="color: green;" class="crypto-percentage-change"><i style="color: green;" class="fas fa-arrow-right"></i> +(100%)</span></span>
+    //     </div> 
+    // </div>
+    // </div>
+   // $(".crypto-action-page-wallet").html("Portefeuille: "+CryptoData.Portfolio+" Dogecoin('s)");
+   // $(".crypto-walletid").html(CryptoData.WalletId);
+   // $(".cryptotab-course-list").html("");
+
     if (CryptoData.History.length > 0) {
         CryptoData.History = CryptoData.History.reverse();
         $.each(CryptoData.History, function(i, change){

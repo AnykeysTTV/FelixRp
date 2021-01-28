@@ -242,7 +242,14 @@ $(document).on('click', '.phone-application', function(e){
                     $.post('http://rs-phone/GetCryptoTransactions', JSON.stringify({}), function(data){
                         RefreshCryptoTransactions(data);
                     })
-                } else if (PressedApplication == "houses") {
+                } 
+                else if (PressedApplication == "services"){
+                    $.post('http://rs-phone/GetOnlineServices', JSON.stringify({}), function(data)
+                    {
+                        setupServicesList(data)
+                    });
+                }
+                else if (PressedApplication == "houses") {
                     $.post('http://rs-phone/GetPlayerHouses', JSON.stringify({}), function(Houses){
                         SetupPlayerHouses(JSON.parse(Houses));
                     });

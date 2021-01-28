@@ -131,11 +131,11 @@ Config.PhoneApplications = {
         slot = 12,
         Alerts = 0,
     },
- ["lawyers"] = {
-         app = "lawyers",
+ ["services"] = {
+         app = "services",
          color = "#353b48",
          icon = "fas fa-user-tie",
-         tooltipText = "Advocatenkantoor",
+         tooltipText = "Telefoonboek",
          tooltipPos = "right",
          job = false,
          blockedjobs = {},

@@ -31,10 +31,7 @@ UpdateCryptoTrend = function(trend, change)
         newValue = 0
     end
 
-    table.insert(Crypto.History[coin], {
-        PreviousWorth = Crypto.Worth[coin],
-        NewWorth = newValue
-    })
+   
     
     Crypto.Worth[coin] = newValue
     RSCore.Functions.ExecuteSql(false, "UPDATE `crypto` SET `worth` = '"..newValue.."', `history` = '"..json.encode(Crypto.History[coin]).."' WHERE `crypto` = '"..coin.."'")

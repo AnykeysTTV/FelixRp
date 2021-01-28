@@ -23,7 +23,8 @@ Config.HeaderDisabledApps = [
     "garage",
     "houses",
     "crypto",
-    'politie'
+    'politie',
+    'services'
 ]
 
 Config.DefaultCryptoPage = "general";
