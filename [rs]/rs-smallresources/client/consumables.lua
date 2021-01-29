@@ -351,24 +351,24 @@ function EcstasyEffect()
 end
 
 function JointEffect()
-    -- if not onWeed then
-    --     local RelieveOdd = math.random(35, 45)
-    --     onWeed = true
-    --     local weedTime = Config.JointEffectTime
-    --     Citizen.CreateThread(function()
-    --         while onWeed do 
-    --             SetPlayerHealthRechargeMultiplier(PlayerId(), 1.8)
-    --             Citizen.Wait(1000)
-    --             weedTime = weedTime - 1
-    --             if weedTime == RelieveOdd then
-    --                 TriggerServerEvent('qb-hud:Server:RelieveStress', math.random(14, 18))
-    --             end
-    --             if weedTime <= 0 then
-    --                 onWeed = false
-    --             end
-    --         end
-    --     end)
-    -- end
+     if not onWeed then
+         local RelieveOdd = math.random(35, 45)
+        onWeed = true
+        local weedTime = Config.JointEffectTime
+        Citizen.CreateThread(function()
+            while onWeed do 
+                SetPlayerHealthRechargeMultiplier(PlayerId(), 1.8)
+                Citizen.Wait(1000)
+                weedTime = weedTime - 1
+                if weedTime == RelieveOdd then
+                    TriggerServerEvent('qb-hud:Server:RelieveStress', math.random(14, 18))
+                end
+                if weedTime <= 0 then
+                    onWeed = false
+                end
+            end
+        end)
+    end
 end
 
 function CrackBaggyEffect()
