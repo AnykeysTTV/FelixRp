@@ -9,7 +9,9 @@ AddEventHandler('rlPlayerActivated', function()
 
     names[source] = { name = GetPlayerName(source), id = source }
 
-    TriggerClientEvent('rlUpdateNames', GetHostId())
+	if GetHostId() then
+		TriggerClientEvent('rlUpdateNames', GetHostId())
+	end
 end)
 
 RegisterServerEvent('rlUpdateNamesResult')
@@ -49,8 +51,22 @@ AddEventHandler('chatMessage', function(netID, name, message)
     RconLog({ msgType = 'chatMessage', netID = netID, name = name, message = message, guid = GetPlayerIdentifiers(netID)[1] })
 end)
 
+-- NOTE: DO NOT USE THIS METHOD FOR HANDLING COMMANDS
+-- This resource has not been updated to use newer methods such as RegisterCommand.
 AddEventHandler('rconCommand', function(commandName, args)
-    if commandName:lower() == 'clientkick' then
+    if commandName == 'status' then
+        for netid, data in pairs(names) do
+            local guid = GetPlayerIdentifiers(netid)
+
+            if guid and guid[1] and data then
+                local ping = GetPlayerPing(netid)
+
+                RconPrint(netid .. ' ' .. guid[1] .. ' ' .. data.name .. ' ' .. GetPlayerEP(netid) .. ' ' .. ping .. "\n")
+            end
+        end
+
+        CancelEvent()
+    elseif commandName:lower() == 'clientkick' then
         local playerId = table.remove(args, 1)
         local msg = table.concat(args, ' ')
 

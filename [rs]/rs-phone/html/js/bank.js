@@ -139,6 +139,10 @@ GetInvoiceLabel = function(type) {
     if (type == "request") {
         retval = "Betaalverzoek";
     }
+    if (type == "boete")
+    {
+        retval = "Boete";
+    }
 
     return retval
 }
@@ -201,11 +205,17 @@ $(document).on('click', '.decline-invoice', function(event){
 RS.Phone.Functions.LoadBankInvoices = function(invoices) {
     if (invoices !== null) {
         $(".bank-app-invoices-list").html("");
-
+        // type amount name
         $.each(invoices, function(i, invoice){
-            var Elem = '<div class="bank-app-invoice" id="invoiceid-'+i+'"> <div class="bank-app-invoice-title">'+GetInvoiceLabel(invoice.type)+' <span style="font-size: 1vh; color: gray;">(Afzender: '+invoice.name+')</span></div> <div class="bank-app-invoice-amount">&euro; '+invoice.amount+',-</div> <div class="bank-app-invoice-buttons"> <i class="fas fa-check-circle pay-invoice"></i> <i class="fas fa-times-circle decline-invoice"></i> </div> </div>';
-
-            $(".bank-app-invoices-list").append(Elem);
+        
+            var element = '<div class="bank-app-invoice" id="invoiceid-'+i+'"> ';
+            element += '<div class="bank-app-invoice-title">'+GetInvoiceLabel(invoice.type)+' <span style="font-size: 1vh; color: gray;">(Afzender: '+invoice.name+')</span></div>';
+            element += '<div class="bank-app-invoice-amount">&euro; '+invoice.amount+',-</div>';
+            element += ' <div class="bank-app-invoice-buttons"> <i class="fas fa-check-circle pay-invoice"></i>';
+            if(invoice.type != "boete")
+            element += ' <i class="fas fa-times-circle decline-invoice"></i>';
+            element += ' </div></div>';
+            $(".bank-app-invoices-list").append(element);
             $("#invoiceid-"+i).data('invoicedata', invoice);
         });
     }

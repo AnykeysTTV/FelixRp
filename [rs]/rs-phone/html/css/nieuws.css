@@ -1,0 +1,54 @@
+
+.nieuws-app {
+    display: none;
+    height: 100%;
+    width: 100%;
+    background: rgb(156, 234, 240);
+    overflow: hidden;
+}
+.nieuws-header {
+
+    line-height: 12vh;
+    text-indent: 2vh;
+    background: violet;
+    
+}
+.nieuws-header > span {
+    position: absolute;
+    top: 9vh;
+    left: 2vh;
+    font-size: 1.2vh;
+    height: 2vh;
+    color: rgba(240, 240, 240, 0.842);
+}
+/* 
+.nieuws-berichten {
+    position: absolute;
+    top: 9vh;
+    left: 2vh;
+    font-size: 1.2vh;
+    height: 2vh;
+    color: rgba(255, 255, 255, 0.842);
+} */
+
+
+
+.nieuws-berichten {
+    position: absolute;
+    background-color: #00000033;
+    width: 90%;
+    height: 90%;
+
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: 3%;
+
+    border-radius: .5vh;
+
+    overflow-y: scroll;
+}
+
+.nieuws-berichten::-webkit-scrollbar {
+    display: none;
+}

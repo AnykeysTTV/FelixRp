@@ -184,6 +184,7 @@ $(document).on('click', '.phone-application', function(e){
                     });
                     $.post('http://rs-phone/GetInvoices', JSON.stringify({}), function(invoices){
                         RS.Phone.Functions.LoadBankInvoices(invoices);
+                
                     });
                 } else if (PressedApplication == "phone") { // Phone
                     $.post('http://rs-phone/GetMissedCalls', JSON.stringify({}), function(recent){
@@ -252,6 +253,10 @@ $(document).on('click', '.phone-application', function(e){
                     $.post('http://rs-phone/SetupStoreApps', JSON.stringify({}), function(data){
                         SetupAppstore(data); 
                     });
+                }
+                else if (PressedApplication =='nieuws')
+                {
+                    SetupNieuwsApp();
                 }
                 else if (PressedApplication == "houses") {
                     $.post('http://rs-phone/GetPlayerHouses', JSON.stringify({}), function(Houses){

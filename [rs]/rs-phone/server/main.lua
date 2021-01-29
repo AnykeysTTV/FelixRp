@@ -1094,7 +1094,7 @@ RSCore.Functions.CreateCallback('rs-phone:server:getOnlineServices', function(so
              or jobinfo == "cardealer" or jobinfo == "reporter" 
              or jobinfo == "tow" or jobinfo == "realestate" or jobinfo == "mechanic"
              then
-                print(Player.PlayerData.charinfo.firstname)
+               
                 table.insert(Lawyers, {
                     name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
                     phone = Player.PlayerData.charinfo.phone,
@@ -1114,7 +1114,7 @@ AddEventHandler('rs-phone:server:InstallApplication', function(ApplicationData)
     Player.PlayerData.metadata["phonedata"].InstalledApps[ApplicationData.app] = ApplicationData
     Player.Functions.SetMetaData("phonedata", Player.PlayerData.metadata["phonedata"])
 
-    -- TriggerClientEvent('rs-phone:RefreshPhone', src)
+     TriggerClientEvent('rs-phone:RefreshPhone', src)
 end)
 
 RegisterServerEvent('rs-phone:server:RemoveInstallation')
@@ -1124,7 +1124,7 @@ AddEventHandler('rs-phone:server:RemoveInstallation', function(App)
     Player.PlayerData.metadata["phonedata"].InstalledApps[App] = nil
     Player.Functions.SetMetaData("phonedata", Player.PlayerData.metadata["phonedata"])
 
-    -- TriggerClientEvent('rs-phone:RefreshPhone', src)
+     TriggerClientEvent('rs-phone:RefreshPhone', src)
 end)
 RSCore.Commands.Add("ophangen", "Hang telefoon op", {}, false, function(source, args)
      

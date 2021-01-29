@@ -474,6 +474,7 @@ RegisterNUICallback('GetInvoices', function(data, cb)
     else
         cb(nil)
     end
+    
 end)
 
 function GetKeyByDate(Number, Date)

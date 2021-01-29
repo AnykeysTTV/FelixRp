@@ -25,7 +25,8 @@ Config.HeaderDisabledApps = [
     "crypto",
     'politie',
     'services',
-    'store'
+    'store',
+    'nieuws'
 ]
 
 Config.DefaultCryptoPage = "general";
