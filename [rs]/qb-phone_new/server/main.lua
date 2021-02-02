@@ -1134,7 +1134,7 @@ AddEventHandler('rs-phone_new:server:InstallApplication', function(ApplicationDa
     Player.PlayerData.metadata["phonedata"].InstalledApps[ApplicationData.app] = ApplicationData
     Player.Functions.SetMetaData("phonedata", Player.PlayerData.metadata["phonedata"])
 
-    -- TriggerClientEvent('rs-phone_new:RefreshPhone', src)
+     TriggerClientEvent('rs-phone_new:RefreshPhone', src)
 end)
 
 RegisterServerEvent('rs-phone_new:server:RemoveInstallation')
@@ -1144,7 +1144,7 @@ AddEventHandler('rs-phone_new:server:RemoveInstallation', function(App)
     Player.PlayerData.metadata["phonedata"].InstalledApps[App] = nil
     Player.Functions.SetMetaData("phonedata", Player.PlayerData.metadata["phonedata"])
 
-    -- TriggerClientEvent('rs-phone_new:RefreshPhone', src)
+     TriggerClientEvent('rs-phone_new:RefreshPhone', src)
 end)
 
 QBCore.Commands.Add("setmetadata", "Set metadata", {}, false, function(source, args)

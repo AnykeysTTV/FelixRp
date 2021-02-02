@@ -96,6 +96,7 @@ end)
 
 Citizen.CreateThread(function()
 	while true do
+	
 		for veh in EnumerateVehicles() do
 			if Config.BlacklistedVehs[GetEntityModel(veh)] then
 				DeleteEntity(veh)
