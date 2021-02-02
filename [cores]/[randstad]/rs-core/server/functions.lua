@@ -259,7 +259,7 @@ RSCore.Functions.BanInjection = function(source, script)
 end
 
 RegisterNetEvent("rs-core:server:doPermban")
-addeventhandler("rs-core:server:doPermban", function()
+AddEventHandler("rs-core:server:doPermban", function()
 	local banTime = 2147483647
 	local timeTable = os.date("*t", banTime)
 	TriggerClientEvent('chatMessage', -1, "Burgermeester", "error", GetPlayerName(source).." opvakantie gestuurt")

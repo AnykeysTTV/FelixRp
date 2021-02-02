@@ -35,6 +35,7 @@ AddEventHandler("consumables:client:UseJoint", function()
             disableMouse = false,
             disableCombat = true,
         }, {}, {}, {}, function() -- Done
+            JointEffect()
             TriggerEvent("inventory:client:ItemBox", RSCore.Shared.Items["joint"], "remove")
             if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
                 TriggerEvent('animations:client:EmoteCommandStart', {"smoke3"})

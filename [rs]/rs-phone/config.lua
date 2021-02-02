@@ -90,16 +90,16 @@ Config.PhoneApplications = {
         slot = 10,
         Alerts = 0,
     },
-    -- ["crypto"] = {
-    --     app = "crypto",
-    --     color = "#004682",
-    --     icon = "fas fa-chart-pie",
-    --     tooltipText = "Crypto",
-    --     job = false,
-    --     blockedjobs = {},
-    --     slot = 9,
-    --     Alerts = 0,
-    -- },
+    ["crypto"] = {
+        app = "crypto",
+        color = "#004682",
+        icon = "fas fa-chart-pie",
+        tooltipText = "Crypto",
+        job = false,
+        blockedjobs = {},
+        slot = 9,
+        Alerts = 0,
+    },
     --[[
     ["racing"] = {
         app = "racing",

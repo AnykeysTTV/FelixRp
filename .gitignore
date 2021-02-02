@@ -33,4 +33,7 @@
 any/
 any/**
 any/*
-example/
+example/*
+test_phone/*
+package/*
+phonev3/*
